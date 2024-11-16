@@ -123,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Désactiver le mode édition
         isEditMode = false;
     }
+    
 
     // Fonction pour soumettre le formulaire et enregistrer les modifications
     function saveChanges() {

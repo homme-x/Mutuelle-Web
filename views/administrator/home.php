@@ -34,12 +34,6 @@ Accueil
 
                 ?>
 
-                <h3 class="text-white">Trésorerie</h3>
-                <h1 id="saving-amount-title">
-                    <?= $exercise->exerciseAmount() ?> XAF
-                </h1>
-                <h3>
-
                     <a href="<?= Yii::getAlias("@administrator.savings") ?>" class="btn btn-white" style="border-radius: 50px">Epargner</a>
 
                     <a href="<?= Yii::getAlias("@administrator.refunds") ?>" class="btn btn-white" style="border-radius: 50px">Rembourser</a>
@@ -391,32 +385,6 @@ Accueil
             <?php
             endif;
             ?>
-
-            <div class="white-block m-2">
-                <h5 class="text-muted text-center">Détail sur la session</h5>
-                <p>Epargne : <span class="blue-text"><?= ($t = $session->savedAmount()) ? $t : 0 ?> XAF</span></p>
-                <p>Remboursement : <span class="blue-text"><?= ($t = $session->refundedAmount()) ? $t : 0 ?> XAF</span></p>
-                <p>Emprunt : <span class="text-secondary"><?= ($t = $session->borrowedAmount()) ? $t : 0  ?> XAF</span></p>
-
-                <h5 class="text-muted text-center mt-3">Phase de la session</h5>
-                <h5 class="text-center blue-text">
-                    <?php
-                    if ($session->state == "SAVING") :
-                    ?>
-                        <a href="<?= Yii::getAlias("@administrator.savings") ?>">Epargne</a>
-                    <?php
-                    elseif ($session->state == "REFUND") :
-                    ?>
-                        <a href="<?= Yii::getAlias("@administrator.refunds") ?>">Remboursement</a>
-                    <?php
-                    elseif ($session->state == "BORROWING") :
-                    ?>
-                        <a href="<?= Yii::getAlias("@administrator.borrowings") ?>">Emprunt</a>
-                    <?php
-                    endif;
-                    ?>
-                </h5>
-            </div>
 
         <?php
         endif;

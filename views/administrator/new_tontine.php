@@ -6,7 +6,7 @@
  * Time: 14:31
  */
 $this->beginBlock('title') ?>
-Nouvelle aide
+Nouvelle Tontine
 <?php $this->endBlock() ?>
 <?php $this->beginBlock('style') ?>
 <style>

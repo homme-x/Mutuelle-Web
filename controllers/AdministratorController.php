@@ -2368,42 +2368,50 @@ public function actionReglerFondSocial($id)
 
     /*************************ajouter des contributions ****************************************************** */
     public function actionAjouterContributionTontine()
-    {
-        if (Yii::$app->request->getIsPost()) {
-            $model = new NewContributionTontineForm();
-            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                $member = Member::findOne($model->member_id);
-                $tontine = Tontine::findOne($model->tontine_id);
-                if ($member && $tontine && $tontine->state) {
-                    $contribution = ContributionTontine::findOne(['member_id' => $model->member_id, 'tontine_id' => $model->tontine_id]);
-                    if ($contribution && !$contribution->state) {
-                        $contribution->state = true;
-                        $contribution->date = $model->date;
-                        $contribution->administrator_id = $this->administrator->id;
-                        $contribution->save();
-                        $help = Help::findOne(['member_id' => $member->id]);
+{
+    if (Yii::$app->request->getIsPost()) {
+        $model = new NewContributionTontineForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $member = Member::findOne($model->member_id);
+            $tontine = Tontine::findOne($model->tontine_id);
+            if ($member && $tontine && $tontine->state) {
+                $contribution = ContributionTontine::findOne(['member_id' => $model->member_id, 'tontine_id' => $model->tontine_id]);
+                if ($contribution && !$contribution->state) {
+                    $contribution->state = true;
+                    $contribution->date = $model->date;
+                    $contribution->administrator_id = $this->administrator->id;
+                    $contribution->save();
 
+                    $help = Help::findOne(['member_id' => $member->id]);
+                    if ($help) { // Vérifiez que $help n'est pas null
                         MailManager::alert_contributeur($member->user(), $member, $help);
+                    }
 
-                        if ($tontine->contributedAmount() == $tontine->amount) {
-                            $tontine->state = false;
-                            $tontine->save();
-                            $help = Help::findOne(['member_id' => $member->id]);
+                    if ($tontine->contributedAmount() == $tontine->amount) {
+                        $tontine->state = false;
+                        $tontine->save();
 
+                        $help = Help::findOne(['member_id' => $member->id]); // Vérifiez à nouveau
+                        if ($help) {
                             MailManager::alert_contributeur($member->user(), $member, $help);
                         }
+                    }
 
-                        return $this->redirect(["@administrator.tontine_details", 'q' => $tontine->id]);
-                    } else
-                        return RedirectionManager::abort($this);
+                    return $this->redirect(["@administrator.tontine_details", 'q' => $tontine->id]);
                 } else {
                     return RedirectionManager::abort($this);
                 }
-            } else
-                return $this->render("new_contribution_tontine", compact('model'));
-        } else
-            return RedirectionManager::abort($this);
+            } else {
+                return RedirectionManager::abort($this);
+            }
+        } else {
+            return $this->render("new_contribution_tontine", compact('model'));
+        }
+    } else {
+        return RedirectionManager::abort($this);
     }
+}
+
 
     /******************************aide du côté Administrateur *************************************************** */
 

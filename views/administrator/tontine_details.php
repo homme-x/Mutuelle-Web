@@ -6,7 +6,7 @@
  * Time: 14:31
  */
 $this->beginBlock('title') ?>
-    Aides
+    Tontine
 <?php $this->endBlock() ?>
 <?php $this->beginBlock('style') ?>
     <style>
@@ -88,7 +88,7 @@ $TontineType = $tontine->TontineType();
                     <h4 class="text-center text-muted"><?= $TontineType->title ?></h4>
                     <p class="comments text-left"><?= $tontine->comments ?></p>
                     <h6 >Créée le : <?= $tontine->created_at ?></h6>
-                    <p class="objective text-primary">Montant de l'aide : <?= $tontine->amount ?> XAF</p>
+                    <p class="objective text-primary">Montant de la tontine: <?= $tontine->amount ?> XAF</p>
                     <h4 class="text-primary">Montant contribution : <?= $tontine->unit_amount ?> XAF / membre</h4>
                     <h4 class="text-secondary m-0 mt-4">Montant contributions perçus : </h4>
                     <p class="contributed text-secondary"><?= ($t=$tontine->contributedAmount())?$t:0 ?> XAF</p>

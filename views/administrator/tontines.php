@@ -10,7 +10,7 @@ use app\models\Tontine;
 use yii\widgets\LinkPager;
 
 $this->beginBlock('title') ?>
-Aides
+Tontines
 <?php $this->endBlock() ?>
 <?php $this->beginBlock('style') ?>
 <style>

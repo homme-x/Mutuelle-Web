@@ -34,12 +34,6 @@ Accueil
 
                 ?>
 
-                    <a href="<?= Yii::getAlias("@administrator.savings") ?>" class="btn btn-white" style="border-radius: 50px">Epargner</a>
-
-                    <a href="<?= Yii::getAlias("@administrator.refunds") ?>" class="btn btn-white" style="border-radius: 50px">Rembourser</a>
-
-                    <a href="<?= Yii::getAlias("@administrator.borrowings") ?>" class="btn btn-white" style="border-radius: 50px">Emprunter</a>
-
 
                 </h3>
                 <?php
